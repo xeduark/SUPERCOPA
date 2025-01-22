@@ -1,0 +1,57 @@
+---
+import Facebook from "@/icons/facebook.astro"
+import GithubIcon from "@/icons/github.astro"
+import InstagramIcon from "@/icons/instagram.astro"
+---
+
+<nav class:list={`${Astro.props.class}`}>
+	<ul
+		class="flex flex-row items-center gap-x-6"
+		aria-label="redes sociales y botón para alternar tema"
+	>
+		<li>
+			<a
+				target="_blank"
+				rel="noopener"
+				aria-label="Instagram de SUPERCOPA, se abrirá en una nueva pestaña"
+				href="https://www.instagram.com/supercopa_lagabriela?igsh=aHVmaWx6Mnhxb3R5"
+				class="inline-block any-hover:scale-125 any-hover:opacity-70 motion-safe:transition motion-reduce:any-hover:scale-100"
+			>
+				<InstagramIcon
+					class="social-icon text-primary transition-colors duration-300 hover:text-accent motion-reduce:duration-0"
+				/>
+			</a>
+		</li>
+		<li>
+			<a
+				target="_blank"
+				rel="noopener"
+				aria-label="Facebook de SUPERCOPA, se abrirá en una nueva pestaña"
+				href="https://www.facebook.com/super.copa.la.gabriela?mibextid=ZbWKwL"
+				class="inline-block any-hover:scale-125 any-hover:opacity-70 motion-safe:transition motion-reduce:any-hover:scale-100"
+			>
+				<Facebook
+					class="social-icon text-primary transition-colors duration-300 hover:text-accent motion-reduce:duration-0"
+				/>
+			</a>
+		</li>
+		<li>
+			<a
+				target="_blank"
+				rel="noopener"
+				aria-label="GitHub de La Velada, se abrirá en una nueva pestaña"
+				href="https://github.com/midudev/la-velada-web-oficial"
+				class="inline-block any-hover:scale-125 any-hover:opacity-70 motion-safe:transition motion-reduce:any-hover:scale-100"
+			>
+				<GithubIcon
+					class="social-icon text-primary transition-colors duration-300 hover:text-accent motion-reduce:duration-0"
+				/>
+			</a>
+		</li>
+	</ul>
+</nav>
+<style>
+	.social-icon:hover {
+		fill: var(--color-accent);
+	}
+</style>

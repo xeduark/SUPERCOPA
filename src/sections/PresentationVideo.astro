@@ -1,0 +1,31 @@
+---
+import DrawnXLogo from "@/components/DrawnXLogo.astro"
+import InstagramEmbed from "@/components/LiteYouTube.astro"
+import Typography from "@/components/Typography.astro"
+---
+
+<section class="mt-10 overflow-hidden px-2 pb-48 pt-16 sm:pb-56 sm:pt-32 md:pb-96 md:pt-32">
+	<Typography as="h3" variant="h3" color="white" class:list={"text-center"}>
+		¡Revive la Épica Final del 2024!
+	</Typography>
+
+	<Typography
+		as="p"
+		variant="body"
+		color="neutral"
+		class:list={"mx-auto mt-4 max-w-[250px] text-wrap text-center"}
+	>
+		No te pierdas los momentos más emocionantes y la euforia de la final.
+	</Typography>
+
+	<div class="relative mt-8">
+		<DrawnXLogo
+			class:list={"absolute inset-0 -z-10 m-auto scale-125 select-none drop-shadow-[0_0_40px_rgba(213,255,0,1)]"}
+		/>
+		<InstagramEmbed
+			postUrl="https://www.instagram.com/reel/DExaV5wvFnQ/?igsh=cGJwaTBhMzA5YjVv"
+			backgroundImage="https://firebasestorage.googleapis.com/v0/b/images-e79d0.appspot.com/o/jor%20gym.jpg?alt=media&token=c1d5a31a-1d6b-43f5-911c-6dec226baade"
+			title="Reproducir final de SUPERCOPA 2024"
+		/>
+	</div>
+</section>

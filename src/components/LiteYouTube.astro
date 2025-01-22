@@ -1,0 +1,160 @@
+---
+interface Props {
+	postUrl?: string
+	title?: string
+	backgroundImage?: string
+}
+
+const { postUrl, title, backgroundImage } = Astro.props
+let postId
+
+if (postUrl) {
+	const urlParts = postUrl.split("/")
+	postId = urlParts[urlParts.length - 2]
+}
+---
+
+<div
+	class="instagram-embed rounded-lg"
+	style={`background-image: url('${backgroundImage}')`}
+	tabindex="0"
+	aria-label="button"
+>
+	<a href={postUrl} class="lty-playbtn" title={title} role="button" tabindex="0">
+		<span class="lyt-visually-hidden">{title}</span>
+	</a>
+</div>
+
+<script>
+	class InstagramEmbed extends HTMLElement {
+		connectedCallback() {
+			const playBtnEl = this.querySelector(".lty-playbtn")
+
+			this.dataset.title = this.getAttribute("title") || ""
+
+			if (playBtnEl) {
+				if (!playBtnEl.textContent) {
+					const playBtnLabelEl = document.createElement("span")
+					playBtnLabelEl.className = "lyt-visually-hidden"
+					playBtnLabelEl.textContent = this.dataset.title
+					playBtnEl.append(playBtnLabelEl)
+				}
+			}
+		}
+	}
+	customElements.define("instagram-embed", InstagramEmbed)
+</script>
+
+<style is:global>
+	.instagram-embed {
+		background-color: #000;
+		position: relative;
+		display: block;
+		contain: content;
+		background-position: center center;
+		background-size: cover;
+		cursor: pointer;
+		aspect-ratio: 16/9;
+		width: 100%;
+		height: auto;
+		border: 2px solid var(--color-accent);
+		transition: all 0.3s ease;
+		box-shadow: 0px 0px 15px rgb(212, 255, 0, 0.1);
+	}
+
+	/* gradient */
+	.instagram-embed::before {
+		content: attr(data-title);
+		display: block;
+		position: absolute;
+		top: 0;
+		/* Pixel-perfect port of YT's gradient PNG, using https://github.com/bluesmoon/pngtocss plus optimizations */
+		background-image: linear-gradient(
+			180deg,
+			rgb(0 0 0 / 67%) 0%,
+			rgb(0 0 0 / 54%) 14%,
+			rgb(0 0 0 / 15%) 54%,
+			rgb(0 0 0 / 5%) 72%,
+			rgb(0 0 0 / 0%) 94%
+		);
+		height: 99px;
+		width: 100%;
+		font-family: "YouTube Noto", Roboto, Arial, Helvetica, sans-serif;
+		color: hsl(0deg 0% 93.33%);
+		text-shadow: 0 0 2px rgba(0, 0, 0, 0.5);
+		font-size: 18px;
+		padding: 25px 20px;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		box-sizing: border-box;
+	}
+
+	.instagram-embed:hover::before {
+		color: white;
+	}
+
+	/* responsive iframe with a 16:9 aspect ratio
+     thanks https://css-tricks.com/responsive-iframes/
+*/
+	.instagram-embed::after {
+		content: "";
+		display: block;
+		padding-bottom: calc(100% / (16 / 9));
+	}
+
+	/* play button */
+	.instagram-embed > .lty-playbtn {
+		display: block;
+		/* Make the button element cover the whole area for a large hover/click target… */
+		width: 100%;
+		height: 100%;
+		/* …but visually it's still the same size */
+		background: no-repeat center/100px 100px;
+		/* YT's actual play button svg */
+		background-image: url('data:image/svg+xml;utf8,<svg stroke="white" fill="white" stroke-width="0" viewBox="0 0 1024 1024"  xmlns="http://www.w3.org/2000/svg"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M719.4 499.1l-296.1-215A15.9 15.9 0 0 0 398 297v430c0 13.1 14.8 20.5 25.3 12.9l296.1-215a15.9 15.9 0 0 0 0-25.8zm-257.6 134V390.9L628.5 512 461.8 633.1z"></path></svg>');
+		position: absolute;
+		cursor: pointer;
+		z-index: 1;
+		filter: grayscale(100%);
+		transition:
+			filter 0.1s cubic-bezier(0, 0, 0.2, 1),
+			transform 0.3s ease;
+		border: 0;
+	}
+
+	.instagram-embed:hover > .lty-playbtn,
+	.instagram-embed .lty-playbtn:focus {
+		background-image: url('data:image/svg+xml;utf8,<svg stroke="white" fill="orange" stroke-width="0" viewBox="0 0 1024 1024"  xmlns="http://www.w3.org/2000/svg"><path d="M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z"></path><path d="M719.4 499.1l-296.1-215A15.9 15.9 0 0 0 398 297v430c0 13.1 14.8 20.5 25.3 12.9l296.1-215a15.9 15.9 0 0 0 0-25.8zm-257.6 134V390.9L628.5 512 461.8 633.1z"></path></svg>');
+		filter: none;
+		transform: scale(1.23);
+	}
+
+	@media (prefers-reduced-motion) {
+		.instagram-embed:hover > .lty-playbtn,
+		.instagram-embed .lty-playbtn:focus {
+			transition: 0s;
+			transform: scale(1);
+		}
+	}
+
+	/* Post-click styles */
+	.instagram-embed.lyt-activated {
+		cursor: unset;
+	}
+	.instagram-embed.lyt-activated::before,
+	.instagram-embed.lyt-activated > .lty-playbtn {
+		opacity: 0;
+		pointer-events: none;
+	}
+
+	.lyt-visually-hidden {
+		clip: rect(0 0 0 0);
+		clip-path: inset(50%);
+		height: 1px;
+		overflow: hidden;
+		position: absolute;
+		white-space: nowrap;
+		width: 1px;
+	}
+</style>
