@@ -1,6 +1,6 @@
-import { type Boxer } from "@/types/Boxer"
+import { type Player } from "@/types/Player"
 
-const addGetters = (boxers: Boxer[]): Boxer[] => {
+const addGetters = (boxers: Player[]): Player[] => {
 	return boxers.map((b) => ({
 		...b,
 		get age() {
@@ -20,17 +20,17 @@ const addGetters = (boxers: Boxer[]): Boxer[] => {
 	}))
 }
 
-export const BOXERS: Boxer[] = addGetters([
+export const BOXERS: Player[] = addGetters([
 	{
-		id: "el-mariana",
-		name: "El Mariana",
-		realName: "Osvaldo Palacios Flores",
+		id: "xeduark",
+		name: "Xeduark",
+		realName: "Jorge Eduardo Muñoz Quintero",
 		gender: "masculino",
-		birthDate: new Date(1998, 6, 23),
+		birthDate: new Date(1998, 8, 22),
 		height: 1.95,
-		age: 25,
+		age: 26,
 		weight: 80.1,
-		country: "mx",
+		country: "Portugal",
 		versus: "plex",
 		guard: "Izquierda",
 		reach: 168,
@@ -56,6 +56,7 @@ export const BOXERS: Boxer[] = addGetters([
 				url: "https://www.youtube.com/embed/ct0Hr6zYZGU?si=AAnuIiM4FcI4uFLu&amp;clip=Ugkx-2lQ3J2MyKiOppp0UnGVO2APKh-r4cnS&amp;clipt=EMSw5wUY3KXoBQ",
 			},
 		],
+		team: "Aguacero FC",
 	},
 	{
 		id: "shelao",

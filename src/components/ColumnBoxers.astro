@@ -1,24 +1,24 @@
 ---
 import type { HTMLAttributes } from "astro/types"
 
-import type { Boxer } from "@/types/Boxer"
+import type { Player } from "@/types/Player"
 
 interface Props {
-	boxers: Boxer[]
+	boxers: Player[]
 	class?: string
-	selectedBoxer: Boxer
+	selectedBoxer: Player
 	imgLoading?: HTMLAttributes<"img">["loading"]
 }
 
 const { boxers, class: className = "", selectedBoxer, imgLoading } = Astro.props
 
-const isAlly = (id: Boxer["id"]) => selectedBoxer.allies?.includes(id)
+const isAlly = (id: Player["id"]) => selectedBoxer.allies?.includes(id)
 
 const hasSameOpponents = (selectedBoxerOpponents: string[], opponents: string[]) => {
 	return selectedBoxerOpponents.every((sBoxerOpponent) => opponents.includes(sBoxerOpponent))
 }
 
-const isOpponent = (id: Boxer["id"], versus: Boxer["versus"]) => {
+const isOpponent = (id: Player["id"], versus: Player["versus"]) => {
 	const selectedBoxerOpponents = Array.isArray(selectedBoxer.versus)
 		? selectedBoxer.versus
 		: [selectedBoxer.versus]

@@ -20,7 +20,7 @@ import { COMBATS } from "@/consts/combats"
 import { COUNTRIES } from "@/consts/countries"
 import Layout from "@/layouts/Layout.astro"
 import CombatSection from "@/sections/Combat.astro"
-import type { Boxer } from "@/types/Boxer"
+import type { Player } from "@/types/Player"
 import type { Preload } from "@/types/Preload"
 
 export function getStaticPaths() {
@@ -47,13 +47,13 @@ if (!boxers) {
 
 const countryName = COUNTRIES[boxer.country]
 
-let rivals: Boxer[] = []
+let rivals: Player[] = []
 if (typeof boxer.versus === "object") {
 	for (const vs of boxer.versus) {
-		rivals = rivals.concat(BOXERS.filter((rival: Boxer) => rival.id === vs))
+		rivals = rivals.concat(BOXERS.filter((rival: Player) => rival.id === vs))
 	}
 } else {
-	rivals = boxers.filter((rival: Boxer) => rival.id !== boxer.id)
+	rivals = boxers.filter((rival: Player) => rival.id !== boxer.id)
 }
 
 const preloadBoxerImage: Preload[] = [
@@ -74,7 +74,7 @@ export const prerender = true
 
 <Layout
 	description={`Información del ${boxer.gender === "masculino" ? "luchador" : "luchadora"} ${boxer.name}`}
-	title={`${boxer.name} - La Velada del Año IV`}
+	title={`${boxer.name} - SUPERCOPA II`}
 	preload={preloadBoxerImage}
 >
 	<main>

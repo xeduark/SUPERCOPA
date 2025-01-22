@@ -3,12 +3,12 @@ import { Image } from "astro:assets"
 
 import Typography from "@/components/Typography.astro"
 import { COMBATS } from "@/consts/combats"
-import type { Boxer } from "@/types/Boxer"
+import type { Player } from "@/types/Player"
 
 interface Props {
 	combatId: string
 	combatNumber: number
-	boxers: Boxer[]
+	boxers: Player[]
 }
 
 const ordinals: Record<number, string> = {
@@ -21,11 +21,11 @@ const ordinals: Record<number, string> = {
 }
 const { combatNumber, combatId, boxers } = Astro.props
 
-const createCombatDisplay = (boxers: Boxer[]) => {
+const createCombatDisplay = (boxers: Player[]) => {
 	const pairs: string[] = []
 	const seen = new Set()
 
-	boxers.forEach((boxer: Boxer) => {
+	boxers.forEach((boxer: Player) => {
 		if (!seen.has(boxer.id)) {
 			seen.add(boxer.id)
 			const group = [boxer.name]
