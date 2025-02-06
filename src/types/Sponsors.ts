@@ -1,4 +1,4 @@
-type SponsorId = "inder" | "dlms" | "vivoon" | "checho" | "xeduark.dev" | "info"
+type SponsorId = "inder" | "dlms" | "vivoon" | "checho" | "xeduark.dev" | "info" | "khanpro"
 
 type SponsorName =
 	| "Inder-Bello"
@@ -7,6 +7,7 @@ type SponsorName =
 	| "Checho Store Imported"
 	| "Xeduark.Dev"
 	| "Info"
+	| "Khanpro"
 
 export interface Sponsors {
 	id: SponsorId

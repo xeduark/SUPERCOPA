@@ -48,6 +48,17 @@ export const SPONSORS: Array<Sponsors> = [
 		},
 	},
 	{
+		id: "khanpro",
+		name: "Khanpro",
+		url: "https://www.instagram.com/khanpro.co?igsh=b2xzZGxzbXpjZTNq",
+		imageUrl:
+			"https://firebasestorage.googleapis.com/v0/b/images-e79d0.appspot.com/o/logoKhanpro.png?alt=media&token=f2afe102-5ef3-4135-bfe5-a5460be4d01e",
+		image: {
+			width: 160,
+			height: 50,
+		},
+	},
+	{
 		id: "xeduark.dev",
 		name: "Xeduark.Dev",
 		url: "https://www.instagram.com/xeduark/",
